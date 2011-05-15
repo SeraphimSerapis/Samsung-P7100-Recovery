@@ -38,12 +38,12 @@ char* MENU_ITEMS[] = { "reboot system now",
                        NULL };
 
 int device_recovery_start() {
-    const char* fn = "./system/bin/sdcard /data/media 1023 1023";
-    ui_print("Trying to mount sdcard now!\n");
-    int i = system(fn);
-    sleep(5);
-    ui_print("system returned: %d\n",i);
-    ui_print("sdcard should be mounted now!\n");
+    const char* fn = "service sdcard /system/bin/sdcard /data/media 1023 1023";
+    // ui_print("Trying to mount sdcard now!\n");
+    //int i = system(fn);
+    //sleep(5);
+    //ui_print("system returned: %d\n",i);
+    // ui_print("sdcard should be mounted now!\n");
 
     return 0;
 }
@@ -57,7 +57,7 @@ int device_reboot_now(volatile char* key_pressed, int key_code) {
     // Reboot if the power key is pressed five times in a row, with
     // no other keys in between.
     static int presses = 0;
-    if (key_code == KEY_POWER) {   // power button
+    if (key_code == KEY_POWER) {
         ++presses;
         return presses == 5;
     } else {
